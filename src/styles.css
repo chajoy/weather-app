@@ -1,3 +1,7 @@
+:root {
+    --font: white;
+}
+
 *,
 *::before,
 *::after {
@@ -8,8 +12,23 @@
     margin: 0;
 }
 
+html {
+    font-family: 'Outfit', sans-serif;
+    color: var(--font);
+}
+
 body {
     -webkit-font-smoothing: antialiased;
+    background-image: url('./assets/img/noah-silliman-WQo7FmqQBpo-unsplash.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 img,
@@ -49,4 +68,27 @@ h4,
 h5,
 h6 {
     text-wrap: balance;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    min-height: 800px;
+    height: 70%;
+    max-width: 1000px;
+    margin: 50px auto 0 auto;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
 }
