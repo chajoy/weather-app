@@ -19,7 +19,7 @@ html {
 
 body {
     -webkit-font-smoothing: antialiased;
-    background-image: url('./assets/img/noah-silliman-WQo7FmqQBpo-unsplash.jpg');
+    background-image: url('../assets/img/noah-silliman-WQo7FmqQBpo-unsplash.jpg');
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -91,4 +91,11 @@ footer {
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr;
     gap: 20px;
+}
+
+.container img {
+    /* Set Weather Icons to White */
+    filter: invert(1);
+
+    height: 50px;
 }
