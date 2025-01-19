@@ -12,9 +12,16 @@ export async function getWeather(location) {
         const response = await fetch(url, {
             mode: 'cors'
         });
+
+        //debug
+        const _data = await response.json();
+
+        // console.log(_data);
+
         const {
-            currentConditions: { conditions, temp, icon, sunrise, sunset }
-        } = await response.json();
+            currentConditions: { conditions, temp, icon, sunrise, sunset },
+            timezone
+        } = _data;
 
         // Parse and Decode Location URI
         location = decodeURIComponent(location)
@@ -29,7 +36,9 @@ export async function getWeather(location) {
             temp,
             icon,
             sunrise: sunrise.substring(0, 5),
-            sunset: sunset.substring(0, 5)
+            sunset: sunset.substring(0, 5),
+            timezone,
+            localTime: getLocalTime(timezone)
         };
 
         // Display Data in Output Container
@@ -40,3 +49,18 @@ export async function getWeather(location) {
         console.error(error);
     }
 }
+
+const getLocalTime = (timezone) => {
+    const date = new Date();
+
+    const options = {
+        timeZone: timezone,
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+
+    const formatter = new Intl.DateTimeFormat('default', options);
+    const localTime = formatter.format(date);
+
+    return localTime;
+};

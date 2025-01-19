@@ -32,6 +32,7 @@ export const Output = (() => {
     const sunrise_time = document.querySelector('#output-container .sunrise p');
     const sunset_time = document.querySelector('#output-container .sunset p');
     const temp = document.querySelector('#output-container .temperature p');
+    const localeTime = document.querySelector('#output-container #localTime');
 
     const Set = (data) => {
         location.textContent = data.location;
@@ -40,6 +41,7 @@ export const Output = (() => {
         sunset_time.textContent = data.sunset;
         temp.textContent = `${Math.floor(data.temp)}°`;
         icon.src = iconMap[data.icon] || '';
+        localeTime.textContent = data.localTime;
     };
 
     const Clear = () => {
