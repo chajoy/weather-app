@@ -10,6 +10,20 @@ import sunrise from '../assets/icon/sunrise.svg';
 import sunset from '../assets/icon/sunset.svg';
 import wind from '../assets/icon/wind.svg';
 
+const iconMap = {
+    'clear-day': clearDay,
+    'clear-night': clearNight,
+    cloudy,
+    fog,
+    'partly-cloudy-day': partlyCloudyDay,
+    'partly-cloudy-night': partlyCloudyNight,
+    rain,
+    snow,
+    sunrise,
+    sunset,
+    wind
+};
+
 export const Output = (() => {
     const container = document.querySelector('#output-container');
     const location = document.querySelector('#output-container h1');
@@ -25,43 +39,7 @@ export const Output = (() => {
         sunrise_time.textContent = data.sunrise;
         sunset_time.textContent = data.sunset;
         temp.textContent = `${Math.floor(data.temp)}°`;
-        switch (data.icon) {
-            case 'clear-day':
-                icon.src = clearDay;
-                break;
-            case 'clear-night':
-                icon.src = clearNight;
-                break;
-            case 'cloudy':
-                icon.src = cloudy;
-                break;
-            case 'fog':
-                icon.src = fog;
-                break;
-            case 'partly-cloudy-day':
-                icon.src = partlyCloudyDay;
-                break;
-            case 'partly-cloudy-night':
-                icon.src = partlyCloudyNight;
-                break;
-            case 'rain':
-                icon.src = rain;
-                break;
-            case 'snow':
-                icon.src = snow;
-                break;
-            case 'sunrise':
-                icon.src = sunrise;
-                break;
-            case 'sunset':
-                icon.src = sunset;
-                break;
-            case 'wind':
-                icon.src = wind;
-                break;
-            default:
-                icon.src = '';
-        }
+        icon.src = iconMap[data.icon] || '';
     };
 
     const Clear = () => {
