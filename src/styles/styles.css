@@ -97,7 +97,8 @@ footer * {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     min-height: 800px;
     height: 70%;
-    width: 900px;
+    min-width: 900px;
+    width: fit-content;
     margin: 50px auto 0 auto;
     padding: 50px;
     display: grid;
@@ -150,6 +151,7 @@ footer * {
     color: var(--font);
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     opacity: 1;
+    gap: 20px;
     transition: opacity 1s;
 }
 
@@ -158,8 +160,9 @@ footer * {
     align-self: center;
 }
 
+/* Location */
 .general h1 {
-    font-size: 7rem;
+    font-size: 5rem;
 }
 
 .general p {
