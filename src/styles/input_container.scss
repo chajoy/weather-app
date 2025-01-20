@@ -1,0 +1,32 @@
+@use '../utils/variables';
+
+.input-container {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-radius: 40px;
+    overflow: hidden;
+    background-color: white;
+    transition: 0.5s;
+    opacity: 0.3;
+
+    input {
+        border: none;
+        font-size: 2rem;
+        padding: 10px 40px;
+        background: none;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input[type='text'] {
+        color: variables.$font-secondary;
+    }
+}
+
+.input-container.focused {
+    transform: scale(1.04);
+    opacity: 1;
+}

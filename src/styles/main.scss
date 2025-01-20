@@ -1,0 +1,108 @@
+@use 'input_container.scss';
+@use '../utils/variables';
+@use '../styles/output_container.scss';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html {
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    background-image: url('../assets/img/noah-silliman-WQo7FmqQBpo-unsplash.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    filter: invert(1);
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+    color: variables.$font;
+
+    * {
+        color: variables.$font;
+    }
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    min-height: 800px;
+    height: 70%;
+    min-width: 900px;
+    width: fit-content;
+    margin: 50px auto 0 auto;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+    color: variables.$font-secondary;
+}
