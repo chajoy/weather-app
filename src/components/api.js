@@ -2,12 +2,14 @@ import * as DOM from './dom';
 
 const params = new URLSearchParams({
     unitGroup: 'uk',
+    // eslint-disable-next-line no-undef
     key: process.env.API_KEY,
     contentType: 'json'
 });
 
 export async function getWeather(location) {
     try {
+        // eslint-disable-next-line no-undef
         let url = `${process.env.API_URL}${location}?${params}`;
         const response = await fetch(url, {
             mode: 'cors'

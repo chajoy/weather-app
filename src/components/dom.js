@@ -31,8 +31,8 @@ export const Output = (() => {
     const location = document.querySelector('#output-container h1');
     const conditions = document.querySelector('#output-container #conditions');
     const icon = document.querySelector('#output-container img');
-    const sunrise_time = document.querySelector('#output-container .suntime p');
-    const sunset_time = document.querySelector('#output-container .suntime p');
+    const sunrise_time = document.querySelector('#sunrise_time');
+    const sunset_time = document.querySelector('#sunset_time');
     const temp = document.querySelector('#output-container .temperature p');
     const localeTime = document.querySelector('#output-container #localTime');
     const week = document.querySelector(`#week`);

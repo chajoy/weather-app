@@ -1,5 +1,10 @@
 @use '../utils/variables';
 
+@mixin self-center {
+    align-self: center;
+    justify-self: center;
+}
+
 .output-container {
     grid-column: span 2;
     display: grid;
@@ -31,15 +36,13 @@
     .temperature {
         grid-area: temp;
         font-size: 13rem;
-        align-self: center;
-        justify-self: center;
+        @include self-center();
     }
 
     .weather-icon {
         grid-area: icon;
         height: 10rem;
-        justify-self: center;
-        align-self: center;
+        @include self-center();
     }
 
     .suntime {
@@ -73,7 +76,9 @@
             align-items: center;
             justify-items: center;
 
-            h1 {
+            h1,
+            .conditions,
+            .temp {
                 grid-column: span 2;
             }
 
@@ -83,14 +88,6 @@
 
             p {
                 font-size: 1.5rem;
-            }
-
-            .conditions {
-                grid-column: span 2;
-            }
-
-            .temp {
-                grid-column: span 2;
             }
         }
     }

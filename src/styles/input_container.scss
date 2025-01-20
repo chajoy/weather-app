@@ -15,10 +15,10 @@
         font-size: 2rem;
         padding: 10px 40px;
         background: none;
-    }
 
-    input:focus {
-        outline: none;
+        &:focus {
+            outline: none;
+        }
     }
 
     input[type='text'] {
