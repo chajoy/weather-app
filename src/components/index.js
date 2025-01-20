@@ -25,3 +25,5 @@ form.addEventListener('submit', (e) => {
         DOM.Output.Set('Enter Valid Location');
     }
 });
+
+getWeather('new york');
