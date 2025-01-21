@@ -64,8 +64,10 @@ export async function getWeather(location, unitGroup) {
 
         DOM.Output.Fade('status', 'out');
         DOM.Output.Clear('status');
-        DOM.Output.Set('output', data);
-        DOM.Output.Fade('output', 'in');
+        setTimeout(() => {
+            DOM.Output.Set('output', data);
+            DOM.Output.Fade('output', 'in');
+        }, 500);
     } catch (error) {
         console.error(error);
         DOM.Output.Set('status', 'error');
