@@ -8,7 +8,7 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
             rel="stylesheet" />
-        <title>Document</title>
+        <title>Weather App</title>
     </head>
 
     <body>
@@ -17,6 +17,13 @@
                 <form id="input-container" class="input-container">
                     <input type="text" id="location" />
                 </form>
+                <div class="options">
+                    <h3>C</h3>
+                    <div id="unitToggle" class="unitToggle">
+                        <div class="circle clicked" id="circle"></div>
+                    </div>
+                    <h3>F</h3>
+                </div>
                 <div id="output-container" class="output-container">
                     <div class="general">
                         <h2 id="localTime"></h2>

@@ -1,13 +1,13 @@
 import * as DOM from './dom';
 
-const params = new URLSearchParams({
-    unitGroup: 'uk',
-    // eslint-disable-next-line no-undef
-    key: process.env.API_KEY,
-    contentType: 'json'
-});
+export async function getWeather(location, unitGroup) {
+    const params = new URLSearchParams({
+        unitGroup: unitGroup,
+        // eslint-disable-next-line no-undef
+        key: process.env.API_KEY,
+        contentType: 'json'
+    });
 
-export async function getWeather(location) {
     DOM.Output.Fade('output', 'out');
     DOM.Output.Set('status', 'loading...');
     DOM.Output.Fade('status', 'in');
@@ -58,7 +58,7 @@ export async function getWeather(location) {
                 day: getDayName(datetime).slice(0, 3),
                 icon,
                 temp: temp + '°',
-                precip: precip + '%'
+                precip: Math.floor(precip) + '%'
             }))
         };
 

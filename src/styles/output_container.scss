@@ -3,7 +3,7 @@
 
 .output-container {
     grid-column: span 2;
-    display: grid;
+    display: flex;
     grid-template-areas:
         'temp general general'
         'icon suntime suntime'

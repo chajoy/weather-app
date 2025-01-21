@@ -78,6 +78,38 @@ h6 {
     text-wrap: balance;
 }
 
+.options {
+    color: variables.$font;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 20px;
+    align-items: center;
+
+    .unitToggle {
+        background-color: wheat;
+        cursor: pointer;
+        border-radius: 20px;
+        border: none;
+        padding: 15px 30px;
+        position: relative;
+        transition: background-color 0.5s;
+
+        .circle {
+            padding: 15px;
+            border-radius: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: white;
+            transition: transform 0.5s;
+
+            &.clicked {
+                transform: translateX(-30px);
+            }
+        }
+    }
+}
+
 footer {
     text-align: center;
     width: 100%;
@@ -99,11 +131,11 @@ footer {
     height: 70%;
     min-width: 900px;
     width: fit-content;
-    margin: 50px auto 0 auto;
+    margin: 0 auto 0 auto;
     padding: 50px;
     display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-columns: auto 1fr;
     gap: 20px;
     color: variables.$font-secondary;
 }

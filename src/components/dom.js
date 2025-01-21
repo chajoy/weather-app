@@ -142,9 +142,42 @@ export const Output = (() => {
         }
     };
 
+    const ConvertTemp = (type) => {
+        const truncateValue = (value) => {
+            if (value >= 0) {
+                return value % 1 >= 0.5 ? Math.ceil(value) : Math.floor(value);
+            } else {
+                return value % 1 >= 0.5 ? Math.floor(value) : Math.ceil(value);
+            }
+        };
+
+        const celciusToFahrenheit = (c) => {
+            const f = c * (9 / 5) + 32;
+            return truncateValue(f);
+        };
+
+        const fahrenheitToCelcius = (f) => {
+            const c = (f - 32) * (5 / 9);
+            return truncateValue(c);
+        };
+
+        let _temp = Number(
+            temp.textContent.slice(0, temp.textContent.length - 1)
+        );
+
+        if (type === 'f') {
+            _temp = celciusToFahrenheit(_temp);
+        } else if (type === 'c') {
+            _temp = fahrenheitToCelcius(_temp);
+        }
+
+        temp.textContent = _temp + '°';
+    };
+
     return {
         Set,
         Clear,
-        Fade
+        Fade,
+        ConvertTemp
     };
 })();
