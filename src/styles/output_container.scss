@@ -1,9 +1,5 @@
 @use '../utils/variables';
-
-@mixin self-center {
-    align-self: center;
-    justify-self: center;
-}
+@use '../utils/mixins';
 
 .output-container {
     grid-column: span 2;
@@ -36,13 +32,13 @@
     .temperature {
         grid-area: temp;
         font-size: 13rem;
-        @include self-center();
+        @include mixins.self-center();
     }
 
     .weather-icon {
         grid-area: icon;
         height: 10rem;
-        @include self-center();
+        @include mixins.self-center();
     }
 
     .suntime {
@@ -91,8 +87,4 @@
             }
         }
     }
-}
-
-.fadeout {
-    opacity: 0;
 }

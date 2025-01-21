@@ -27,6 +27,7 @@ const iconMap = {
 
 export const Output = (() => {
     const container = document.querySelector('#output-container');
+    const status_msg = document.querySelector('#status-msg');
     const country = document.querySelector('#output-container #country');
     const location = document.querySelector('#output-container h1');
     const conditions = document.querySelector('#output-container #conditions');
@@ -37,29 +38,65 @@ export const Output = (() => {
     const localeTime = document.querySelector('#output-container #localTime');
     const week = document.querySelector(`#week`);
 
-    const Set = (data) => {
-        country.textContent = data.country;
-        location.textContent = data.location;
-        conditions.textContent = data.conditions;
-        sunrise_time.textContent = data.sunrise;
-        sunset_time.textContent = data.sunset;
-        temp.textContent = `${Math.floor(data.temp)}°`;
-        icon.src = iconMap[data.icon] || '';
-        localeTime.textContent = data.localTime;
-        BuildWeekForecast(data.days);
+    const elements = {
+        status: status_msg,
+        output: container
     };
 
-    const Clear = () => {
-        location.textContent = '';
-        conditions.textContent = '';
+    const Set = (object, data) => {
+        if (object === 'status') {
+            if (typeof data !== 'string') {
+                status_msg.textContent = 'error';
+                console.error("status not typeof 'string'");
+            } else {
+                status_msg.textContent = data;
+            }
+        } else if (object === 'output') {
+            if (typeof data !== 'object') {
+                status_msg.textContent = 'error';
+                console.error("data not typeof 'object'");
+            } else {
+                container.style.display = 'grid';
+                country.textContent = data.country;
+                location.textContent = data.location;
+                conditions.textContent = data.conditions;
+                sunrise_time.textContent = data.sunrise;
+                sunset_time.textContent = data.sunset;
+                temp.textContent = `${Math.floor(data.temp)}°`;
+                icon.src = iconMap[data.icon] || '';
+                localeTime.textContent = data.localTime;
+                BuildWeekForecast(data.days);
+            }
+        }
     };
 
-    const Fade = (displayFunction) => {
-        container.classList.add('fadeout');
-        setTimeout(() => {
-            container.classList.remove('fadeout');
-            displayFunction();
-        }, 1000);
+    const Clear = (object) => {
+        const element = elements[object];
+
+        if (!element) {
+            console.error('[Clear]Cant apply to selected object');
+        } else {
+            while (element.firstChild) {
+                element.firstChild.remove();
+            }
+            element.textContent = '';
+        }
+    };
+
+    const Fade = (object, direction) => {
+        const element = elements[object];
+
+        if (!element) {
+            console.error('[Fade]Cant apply to selected object');
+        } else {
+            if (direction === 'in') {
+                element.classList.remove('fadeout');
+            } else if (direction === 'out') {
+                element.classList.add('fadeout');
+            } else {
+                console.error('[Fade]Direction not valid');
+            }
+        }
     };
 
     const BuildWeekForecast = (days) => {

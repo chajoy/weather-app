@@ -8,12 +8,20 @@ const params = new URLSearchParams({
 });
 
 export async function getWeather(location) {
+    DOM.Output.Fade('output', 'out');
+    DOM.Output.Set('status', 'loading...');
+    DOM.Output.Fade('status', 'in');
+
     try {
         // eslint-disable-next-line no-undef
         let url = `${process.env.API_URL}${location}?${params}`;
         const response = await fetch(url, {
             mode: 'cors'
         });
+
+        if (!response.ok) {
+            throw new Error(`${response.status}`);
+        }
 
         const {
             resolvedAddress,
@@ -54,12 +62,14 @@ export async function getWeather(location) {
             }))
         };
 
-        // Display Data in Output Container
-        DOM.Output.Fade(() => {
-            DOM.Output.Set(data);
-        });
+        DOM.Output.Fade('status', 'out');
+        DOM.Output.Clear('status');
+        DOM.Output.Set('output', data);
+        DOM.Output.Fade('output', 'in');
     } catch (error) {
         console.error(error);
+        DOM.Output.Set('status', 'error');
+        DOM.Output.Fade('status', 'in');
     }
 }
 

@@ -1,6 +1,7 @@
-@use 'input_container.scss';
+@use './input_container.scss';
 @use '../utils/variables';
-@use '../styles/output_container.scss';
+@use './output_container.scss';
+@use '../utils/mixins';
 
 *,
 *::before,
@@ -105,4 +106,17 @@ footer {
     grid-template-rows: auto 1fr;
     gap: 20px;
     color: variables.$font-secondary;
+}
+
+.status-msg {
+    color: variables.$font;
+    @include mixins.self-center();
+    position: absolute;
+    opacity: 1;
+    transition: opacity 1s;
+    font-size: 2rem;
+}
+
+.fadeout {
+    opacity: 0;
 }
