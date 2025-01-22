@@ -72,8 +72,8 @@ export async function getWeather(location, unitGroup) {
                         temp: Math.floor(temp) + '°',
                         precip: Math.floor(precip) + '%',
                         conditions,
-                        sunrise,
-                        sunset
+                        sunrise: sunrise.substring(0, 5),
+                        sunset: sunset.substring(0, 5)
                     })
                 )
         };

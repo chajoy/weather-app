@@ -14,15 +14,15 @@ import icon_precip from '../assets/icon/precipitation.svg';
 const iconMap = {
     'clear-day': icon_clearDay,
     'clear-night': icon_clearNight,
-    icon_cloudy,
-    icon_fog,
+    cloudy: icon_cloudy,
+    fog: icon_fog,
     'partly-cloudy-day': icon_partlyCloudyDay,
     'partly-cloudy-night': icon_partlyCloudyNight,
-    icon_rain,
-    icon_snow,
-    icon_sunrise,
-    icon_sunset,
-    icon_wind
+    rain: icon_rain,
+    snow: icon_snow,
+    sunrise: icon_sunrise,
+    sunset: icon_sunrise,
+    wind: icon_wind
 };
 
 export const Output = (() => {
@@ -64,7 +64,7 @@ export const Output = (() => {
                 sunrise_time.textContent = data.sunrise;
                 sunset_time.textContent = data.sunset;
                 temp.textContent = `${Math.floor(data.temp)}°`;
-                icon.src = iconMap[data.icon] || '';
+                icon.src = iconMap[data.icon];
                 localeTime.textContent = data.localTime;
                 BuildWeekForecast(data.days);
             }
@@ -109,12 +109,12 @@ export const Output = (() => {
                 container: document.createElement('div'),
                 day_name: document.createElement('h1'),
                 conditions: document.createElement('img'),
+                conditions_text: document.createElement('p'),
                 temp: document.createElement('p'),
                 precip_icon: document.createElement('img'),
                 precip_text: document.createElement('p'),
                 precip_title: document.createElement('h2'),
                 fullDate: document.createElement('h2'),
-                conditions_text: document.createElement('p'),
                 sunrise_text: document.createElement('p'),
                 sunrise_icon: document.createElement('img'),
                 sunset_text: document.createElement('p'),
@@ -126,7 +126,7 @@ export const Output = (() => {
             day.day_name.textContent = days[x].day;
             day.day_name.classList.add('day_name');
 
-            day.conditions.src = iconMap[days[x].icon] || '';
+            day.conditions.src = iconMap[days[x].icon];
             day.conditions.classList.add('conditions');
 
             day.temp.textContent = days[x].temp;
@@ -236,7 +236,7 @@ export const Output = (() => {
                 _day.style.display = 'grid';
             }
             Fade('week', 'in');
-        }, 500);
+        }, 300);
     };
 
     return {

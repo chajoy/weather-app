@@ -18,8 +18,14 @@ document.addEventListener('click', (event) => {
         unitToggle.classList.toggle('clicked');
         switchUnit();
     } else if (targetAttribute === 'day') {
-        const target = event.target.closest('#day-container');
-        DOM.Output.ToggleDay(target);
+        if (document.querySelector('.active')) {
+            DOM.Output.ToggleDay();
+        } else {
+            const target = event.target.closest('#day-container');
+            DOM.Output.ToggleDay(target);
+        }
+    } else if (targetAttribute === 'input') {
+        input.focus();
     } else {
         if (document.querySelector('.active')) {
             DOM.Output.ToggleDay();
