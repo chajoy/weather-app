@@ -123,6 +123,7 @@ export const Output = (() => {
 
             day.temp.textContent = days[x].temp;
             day.temp.classList.add('temp');
+            day.temp.setAttribute('id', 'week_temp');
 
             day.precip_icon.src = precip;
             day.precip_icon.classList.add('precipitation');
@@ -143,11 +144,15 @@ export const Output = (() => {
     };
 
     const ConvertTemp = (type) => {
+        const week_temps = document.querySelectorAll(
+            '#week_temp, #output-container .temperature p'
+        );
+
         const truncateValue = (value) => {
             if (value >= 0) {
-                return value % 1 >= 0.5 ? Math.ceil(value) : Math.floor(value);
+                return value % 1 <= 0.5 ? Math.floor(value) : Math.ceil(value);
             } else {
-                return value % 1 >= 0.5 ? Math.floor(value) : Math.ceil(value);
+                return value % 1 >= -0.5 ? Math.ceil(value) : Math.floor(value);
             }
         };
 
@@ -161,17 +166,17 @@ export const Output = (() => {
             return truncateValue(c);
         };
 
-        let _temp = Number(
-            temp.textContent.slice(0, temp.textContent.length - 1)
-        );
-
-        if (type === 'f') {
-            _temp = celciusToFahrenheit(_temp);
-        } else if (type === 'c') {
-            _temp = fahrenheitToCelcius(_temp);
-        }
-
-        temp.textContent = _temp + '°';
+        week_temps.forEach((temp) => {
+            let _temp = Number(
+                temp.textContent.slice(0, temp.textContent.length - 1)
+            );
+            if (type === 'f') {
+                _temp = celciusToFahrenheit(_temp);
+            } else if (type === 'c') {
+                _temp = fahrenheitToCelcius(_temp);
+            }
+            temp.textContent = _temp + '°';
+        });
     };
 
     return {

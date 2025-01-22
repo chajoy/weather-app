@@ -57,7 +57,7 @@ export async function getWeather(location, unitGroup) {
             days: days.slice(1, 7).map(({ datetime, icon, temp, precip }) => ({
                 day: getDayName(datetime).slice(0, 3),
                 icon,
-                temp: temp + '°',
+                temp: Math.floor(temp) + '°',
                 precip: Math.floor(precip) + '%'
             }))
         };
