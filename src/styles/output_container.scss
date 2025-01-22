@@ -60,10 +60,10 @@
 
     .week {
         grid-area: week;
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        display: flex;
         gap: 20px;
         margin: 40px 0 0 0;
+        transition: opacity 0.5s;
 
         .day {
             display: grid;
@@ -71,6 +71,10 @@
             grid-template-rows: repeat(4, 1fr);
             align-items: center;
             justify-items: center;
+            @include mixins.opaque_container();
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.1s;
 
             h1,
             .conditions,
@@ -83,7 +87,116 @@
             }
 
             p {
+                &.conditions {
+                    display: none;
+                }
                 font-size: 1.5rem;
+            }
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            &.active {
+                width: 100%;
+                padding: 0 20px;
+                gap: 0 20px;
+                grid-template-columns: auto auto 1fr;
+                grid-template-areas:
+                    'a a a c c'
+                    'b b b c c'
+                    'e d j f g'
+                    'e d j h i';
+                justify-items: start;
+
+                .day_name {
+                    display: none;
+                }
+
+                .fullDate {
+                    grid-area: a;
+                    display: block;
+                    font-size: 2rem;
+                    align-self: flex-end;
+                }
+
+                .sunset {
+                    display: block;
+                }
+
+                .sunrise {
+                    display: block;
+                }
+
+                .precipitation {
+                    grid-area: d;
+                }
+
+                h2 {
+                    &.precipitation {
+                        display: block;
+                    }
+                }
+
+                img {
+                    &.conditions {
+                        grid-area: e;
+                        height: 5rem;
+                    }
+                    &.sunset {
+                        grid-area: g;
+                    }
+                    &.sunrise {
+                        grid-area: f;
+                    }
+                    &.precipitation {
+                        display: none;
+                    }
+                    @include mixins.self-center();
+                }
+
+                p {
+                    &.conditions {
+                        display: block;
+                        grid-area: b;
+                    }
+                    &.sunset {
+                        grid-area: i;
+                    }
+                    &.sunrise {
+                        grid-area: h;
+                    }
+                    &.temp {
+                        font-size: 4rem;
+                    }
+                    &.precipitation {
+                        grid-area: j;
+                    }
+                    margin: 5px;
+                }
+
+                .temp {
+                    justify-self: center;
+                    grid-area: c;
+                }
+            }
+
+            .sunset {
+                display: none;
+            }
+
+            .sunrise {
+                display: none;
+            }
+
+            .fullDate {
+                display: none;
+            }
+
+            h2 {
+                &.precipitation {
+                    display: none;
+                }
             }
         }
     }

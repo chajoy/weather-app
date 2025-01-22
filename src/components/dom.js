@@ -1,33 +1,32 @@
-import clearDay from '../assets/icon/clear-day.svg';
-import clearNight from '../assets/icon/clear-night.svg';
-import cloudy from '../assets/icon/cloudy.svg';
-import fog from '../assets/icon/fog.svg';
-import partlyCloudyDay from '../assets/icon/partly-cloudy-day.svg';
-import partlyCloudyNight from '../assets/icon/partly-cloudy-night.svg';
-import rain from '../assets/icon/rain.svg';
-import snow from '../assets/icon/snow.svg';
-import sunrise from '../assets/icon/sunrise.svg';
-import sunset from '../assets/icon/sunset.svg';
-import wind from '../assets/icon/wind.svg';
-import precip from '../assets/icon/precipitation.svg';
+import icon_clearDay from '../assets/icon/clear-day.svg';
+import icon_clearNight from '../assets/icon/clear-night.svg';
+import icon_cloudy from '../assets/icon/cloudy.svg';
+import icon_fog from '../assets/icon/fog.svg';
+import icon_partlyCloudyDay from '../assets/icon/partly-cloudy-day.svg';
+import icon_partlyCloudyNight from '../assets/icon/partly-cloudy-night.svg';
+import icon_rain from '../assets/icon/rain.svg';
+import icon_snow from '../assets/icon/snow.svg';
+import icon_sunrise from '../assets/icon/sunrise.svg';
+import icon_sunset from '../assets/icon/sunset.svg';
+import icon_wind from '../assets/icon/wind.svg';
+import icon_precip from '../assets/icon/precipitation.svg';
 
 const iconMap = {
-    'clear-day': clearDay,
-    'clear-night': clearNight,
-    cloudy,
-    fog,
-    'partly-cloudy-day': partlyCloudyDay,
-    'partly-cloudy-night': partlyCloudyNight,
-    rain,
-    snow,
-    sunrise,
-    sunset,
-    wind
+    'clear-day': icon_clearDay,
+    'clear-night': icon_clearNight,
+    icon_cloudy,
+    icon_fog,
+    'partly-cloudy-day': icon_partlyCloudyDay,
+    'partly-cloudy-night': icon_partlyCloudyNight,
+    icon_rain,
+    icon_snow,
+    icon_sunrise,
+    icon_sunset,
+    icon_wind
 };
 
 export const Output = (() => {
     const container = document.querySelector('#output-container');
-    const status_msg = document.querySelector('#status-msg');
     const country = document.querySelector('#output-container #country');
     const location = document.querySelector('#output-container h1');
     const conditions = document.querySelector('#output-container #conditions');
@@ -37,10 +36,12 @@ export const Output = (() => {
     const temp = document.querySelector('#output-container .temperature p');
     const localeTime = document.querySelector('#output-container #localTime');
     const week = document.querySelector(`#week`);
+    const status_msg = document.querySelector('#status-msg');
 
-    const elements = {
+    let elements = {
         status: status_msg,
-        output: container
+        output: container,
+        week: week
     };
 
     const Set = (object, data) => {
@@ -85,7 +86,6 @@ export const Output = (() => {
 
     const Fade = (object, direction) => {
         const element = elements[object];
-
         if (!element) {
             console.error('[Fade]Cant apply to selected object');
         } else {
@@ -111,12 +111,20 @@ export const Output = (() => {
                 conditions: document.createElement('img'),
                 temp: document.createElement('p'),
                 precip_icon: document.createElement('img'),
-                precip_text: document.createElement('p')
+                precip_text: document.createElement('p'),
+                precip_title: document.createElement('h2'),
+                fullDate: document.createElement('h2'),
+                conditions_text: document.createElement('p'),
+                sunrise_text: document.createElement('p'),
+                sunrise_icon: document.createElement('img'),
+                sunset_text: document.createElement('p'),
+                sunset_icon: document.createElement('img')
             };
             day.container.classList.add('day');
-            day.container.setAttribute('id', 'day');
+            day.container.setAttribute('id', 'day-container');
 
             day.day_name.textContent = days[x].day;
+            day.day_name.classList.add('day_name');
 
             day.conditions.src = iconMap[days[x].icon] || '';
             day.conditions.classList.add('conditions');
@@ -125,18 +133,50 @@ export const Output = (() => {
             day.temp.classList.add('temp');
             day.temp.setAttribute('id', 'week_temp');
 
-            day.precip_icon.src = precip;
+            day.precip_icon.src = icon_precip;
             day.precip_icon.classList.add('precipitation');
 
             day.precip_text.textContent = days[x].precip;
             day.precip_text.classList.add('precipitation');
+
+            day.precip_title.textContent = 'Precipitation:';
+            day.precip_title.classList.add('precipitation');
+
+            day.fullDate.textContent = days[x].fullDate;
+            day.fullDate.classList.add('fullDate');
+
+            day.conditions_text.textContent = days[x].conditions;
+            day.conditions_text.classList.add('conditions');
+
+            day.sunrise_icon.src = icon_sunrise;
+            day.sunrise_text.textContent = days[x].sunrise;
+            day.sunrise_icon.classList.add('sunrise');
+            day.sunrise_text.classList.add('sunrise');
+
+            day.sunset_icon.src = icon_sunset;
+            day.sunset_text.textContent = days[x].sunset;
+            day.sunset_icon.classList.add('sunset');
+            day.sunset_text.classList.add('sunset');
+
+            for (const key in day) {
+                if (Object.prototype.hasOwnProperty.call(day, key)) {
+                    day[key].setAttribute('d_element', 'day');
+                }
+            }
 
             day.container.append(
                 day.day_name,
                 day.conditions,
                 day.temp,
                 day.precip_icon,
-                day.precip_text
+                day.precip_text,
+                day.precip_title,
+                day.fullDate,
+                day.conditions_text,
+                day.sunrise_icon,
+                day.sunrise_text,
+                day.sunset_icon,
+                day.sunset_text
             );
 
             week.appendChild(day.container);
@@ -179,10 +219,31 @@ export const Output = (() => {
         });
     };
 
+    const ToggleDay = (_day = 'all') => {
+        Fade('week', 'out');
+        const days = document.querySelectorAll('#day-container');
+        setTimeout(() => {
+            if (_day === 'all') {
+                days.forEach((day) => {
+                    day.classList.remove('active');
+                    day.style.display = 'grid';
+                });
+            } else {
+                _day.classList.add('active');
+                days.forEach((day) => {
+                    day.style.display = 'none';
+                });
+                _day.style.display = 'grid';
+            }
+            Fade('week', 'in');
+        }, 500);
+    };
+
     return {
         Set,
         Clear,
         Fade,
-        ConvertTemp
+        ConvertTemp,
+        ToggleDay
     };
 })();

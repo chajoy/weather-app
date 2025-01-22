@@ -54,12 +54,28 @@ export async function getWeather(location, unitGroup) {
             sunset: sunset.substring(0, 5),
             timezone,
             localTime: getLocalTime(timezone),
-            days: days.slice(1, 7).map(({ datetime, icon, temp, precip }) => ({
-                day: getDayName(datetime).slice(0, 3),
-                icon,
-                temp: Math.floor(temp) + '°',
-                precip: Math.floor(precip) + '%'
-            }))
+            days: days
+                .slice(1, 7)
+                .map(
+                    ({
+                        datetime,
+                        icon,
+                        temp,
+                        precip,
+                        sunrise,
+                        sunset,
+                        conditions
+                    }) => ({
+                        day: getDayName(datetime).slice(0, 3),
+                        fullDate: getFullDate(datetime),
+                        icon,
+                        temp: Math.floor(temp) + '°',
+                        precip: Math.floor(precip) + '%',
+                        conditions,
+                        sunrise,
+                        sunset
+                    })
+                )
         };
 
         DOM.Output.Fade('status', 'out');
@@ -84,13 +100,24 @@ const getLocalTime = (timezone) => {
         minute: '2-digit'
     };
 
-    const formatter = new Intl.DateTimeFormat('default', options);
-    const localTime = formatter.format(date);
-
-    return localTime;
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(date);
 };
 
 const getDayName = (date) => {
     const _date = new Date(date);
-    return _date.toLocaleDateString('default', { weekday: 'long' });
+    return _date.toLocaleDateString('en-US', { weekday: 'long' });
+};
+
+const getFullDate = (date) => {
+    const _date = new Date(date);
+
+    const options = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long'
+    };
+
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(_date);
 };

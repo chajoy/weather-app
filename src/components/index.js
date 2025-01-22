@@ -8,13 +8,23 @@ const form = document.querySelector('#input-container');
 const input = document.querySelector('#location');
 
 // unit toggle
-const unitToggle = document.querySelector('#unitToggle');
-const circle = document.querySelector('#unitToggle #circle');
+const unitToggle = document.querySelector('#unitToggle_container');
+const circle = document.querySelector('#unitToggle_circle');
 
-unitToggle.addEventListener('click', () => {
-    circle.classList.toggle('clicked');
-    unitToggle.classList.toggle('clicked');
-    switchUnit();
+document.addEventListener('click', (event) => {
+    const targetAttribute = event.target.getAttribute('d_element');
+    if (targetAttribute === 'unitToggle') {
+        circle.classList.toggle('clicked');
+        unitToggle.classList.toggle('clicked');
+        switchUnit();
+    } else if (targetAttribute === 'day') {
+        const target = event.target.closest('#day-container');
+        DOM.Output.ToggleDay(target);
+    } else {
+        if (document.querySelector('.active')) {
+            DOM.Output.ToggleDay();
+        }
+    }
 });
 
 input.addEventListener('focus', () => {
