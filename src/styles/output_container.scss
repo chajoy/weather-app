@@ -58,6 +58,7 @@
         }
     }
 
+    // weekly forecast
     .week {
         grid-area: week;
         display: flex;
@@ -77,10 +78,20 @@
             cursor: pointer;
             transition: background-color 0.1s;
 
-            h1,
-            .conditions,
+            h1 {
+                grid-column: span 2;
+            }
+
             .temp {
                 grid-column: span 2;
+            }
+
+            .conditions {
+                grid-column: span 2;
+            }
+
+            h2.precipitation {
+                display: none;
             }
 
             img {
@@ -88,16 +99,29 @@
             }
 
             p {
+                font-size: 1.5rem;
                 &.conditions {
                     display: none;
                 }
-                font-size: 1.5rem;
+            }
+
+            .sunset {
+                display: none;
+            }
+
+            .sunrise {
+                display: none;
+            }
+
+            .fullDate {
+                display: none;
             }
 
             &:hover {
                 background-color: rgba(255, 255, 255, 0.2);
             }
 
+            // style day container and elements when set as active day
             &.active {
                 width: 100%;
                 padding: 0 20px;
@@ -144,12 +168,6 @@
                         grid-area: e;
                         height: 5rem;
                     }
-                    &.sunset {
-                        grid-area: g;
-                    }
-                    &.sunrise {
-                        grid-area: f;
-                    }
                     &.precipitation {
                         display: none;
                     }
@@ -161,42 +179,17 @@
                         display: block;
                         grid-area: b;
                     }
-                    &.sunset {
-                        grid-area: i;
-                    }
-                    &.sunrise {
-                        grid-area: h;
-                    }
                     &.temp {
                         font-size: 4rem;
                     }
                     &.precipitation {
                         grid-area: j;
                     }
-                    margin: 5px;
                 }
 
                 .temp {
                     justify-self: center;
                     grid-area: c;
-                }
-            }
-
-            .sunset {
-                display: none;
-            }
-
-            .sunrise {
-                display: none;
-            }
-
-            .fullDate {
-                display: none;
-            }
-
-            h2 {
-                &.precipitation {
-                    display: none;
                 }
             }
         }
