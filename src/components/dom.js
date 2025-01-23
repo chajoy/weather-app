@@ -40,7 +40,7 @@ export const Output = (() => {
         status_msg: document.querySelector('#status-msg')
     };
 
-    let elements = {
+    const elements = {
         status: DOMelements.status_msg,
         output: DOMelements.container,
         week: DOMelements.week
@@ -52,7 +52,7 @@ export const Output = (() => {
         } else if (object === 'output' && typeof data === 'object') {
             DOMelements.container.style.display = 'grid';
             DOMelements.country.textContent = data.country;
-            location.textContent = data.location;
+            DOMelements.location.textContent = data.location;
             DOMelements.conditions.textContent = data.conditions;
             DOMelements.sunrise_time.textContent = data.sunrise;
             DOMelements.sunset_time.textContent = data.sunset;
